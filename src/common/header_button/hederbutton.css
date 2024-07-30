@@ -1,0 +1,56 @@
+.outer {
+  cursor: pointer;
+}
+
+.outer > img {
+  z-index: 2;
+}
+
+.background {
+  background-color: #2b2d2f;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltip-container .tooltip-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: rgba(226, 215, 215, 0.8); /* Semi-transparent background */
+  color: black;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px 5px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 125%; /* Adjust as needed */
+  left: 50%;
+  margin-left: -60px; /* Use half of the tooltip width to center it */
+
+  /* Tooltip arrow */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip-container .tooltip-text::after {
+  content: "";
+  position: absolute;
+  bottom: 100%; /* Arrow at the bottom of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent rgba(226, 215, 215, 0.8) transparent; /* Semi-transparent arrow */
+}
+
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}

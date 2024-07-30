@@ -9,13 +9,15 @@ const Footer = () => {
   const percent = ((currentPage / totalPage) * 100).toFixed(0);
 
   return (
-    <div className="progress-container">
-      <div className="progress-layer"></div>
-      <div className="progress-bar" style={{ width: `${percent}%` }}></div>
-      <span>
+    <>
+      <div className="progress-container">
+        <div className="progress-layer"></div>
+        <div className="progress-bar" style={{ width: `${percent}%` }}></div>
+      </div>
+      <span className="progress-text">
         {percent}% - Location - {currentPage} of {totalPage}
       </span>
-    </div>
+    </>
   );
 };
 

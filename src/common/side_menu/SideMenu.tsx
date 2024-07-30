@@ -6,7 +6,7 @@ import { handleModal } from "../../slices/fontSetting";
 const SideMenu = ({ name, body }: any) => {
   const dispatch = useDispatch();
   return (
-    <div className="popup">
+    <div className="popup" key={name}>
       <div className="popup_inner">
         <h1>{name}</h1>
         <img

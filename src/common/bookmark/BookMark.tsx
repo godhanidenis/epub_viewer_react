@@ -18,8 +18,6 @@ const Highlight = () => {
     setNotes(newNotes);
   };
 
-  console.log(highlights);
-
   const handleId = (range) => {
     const splitCfi = cfiRangeSpliter(range);
     if (!splitCfi) return;

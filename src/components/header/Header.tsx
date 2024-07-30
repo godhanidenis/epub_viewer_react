@@ -21,38 +21,38 @@ const Header = ({ fullScreenToggler }: any) => {
   return (
     <div className="container">
       <div className="left-section">
-        {/* <CustomTitle title="Back to Library" onClick={() => goToLib()} /> */}
         <HederButton
           name="refresh"
-          icon="fa fa-refresh lg"
+          icon="\img\Refresh.png"
           onClick={() => window.location.reload()}
         />
         <HederButton
           name="fontSize"
-          icon="fa fa-font lg"
+          icon="\img\Fontstyle.png"
           onClick={() => toggleModel("fontsetting")}
         />
+        <span className="divider"></span>
         <HederButton
           name="fullscreen"
-          icon="fa fa-arrows-alt lg"
+          icon="\img\zoomin.png"
           onClick={() => fullScreenToggler()}
         />
-        {/* <HederButton name="search" icon="fa-window-maximize lg" onClick={() => spreadOption()} /> */}
+        <span className="divider"></span>
         <HederButton
           name="multiview"
-          icon="fa fa-columns lg"
+          icon="\img\bookpreview.png"
           onClick={() => handleMultiView()}
         />
       </div>
       <div className="right-section">
         <HederButton
-          name="bookmark"
-          icon="fa fa-bookmark lg"
+          name="book mark"
+          icon="\img\wishlist.png"
           onClick={() => toggleModel("bookmark")}
         />
         <HederButton
           name="show notebook"
-          icon="fa fa-bookmark lg"
+          icon={false}
           onClick={() => toggleModel("content")}
         />
       </div>

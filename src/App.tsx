@@ -8,6 +8,7 @@ import BookMark from "./common/bookmark/BookMark";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { useCallback } from "react";
 import TableOfContent from "./common/toc/TableOfContent";
+import Footer from "./components/footer/Footer";
 
 function App() {
   const fullScreenHandle = useFullScreenHandle();
@@ -28,6 +29,7 @@ function App() {
       <Provider store={store}>
         <RefContext.Provider value={viewerRef}>
           <Header fullScreenToggler={fullScreenToggler} />
+          <Footer />
           <PdfViewer />
           <FontSetting />
           <BookMark />

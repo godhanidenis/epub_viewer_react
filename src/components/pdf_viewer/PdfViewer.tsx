@@ -7,7 +7,6 @@ import ContextMenu from "../contex-menu/ContextMenu";
 import useHighlight from "../../hooks/useHighlight";
 import { RefContext } from "../../App";
 import LoadingView from "./LoadingView";
-import Footer from "../footer/Footer";
 
 const viewerLayout = {
   MIN_VIEWER_WIDTH: 300,
@@ -130,8 +129,6 @@ const PdfViewer = () => {
         onUpdateHighlight={onUpdateHighlight}
         onContextmMenuRemove={onContextmMenuRemove}
       />
-
-      <Footer />
     </>
   );
 };

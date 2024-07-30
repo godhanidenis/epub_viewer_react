@@ -1,21 +1,28 @@
 .progress-container {
-  width: 99dvw;
-  padding: 5px 20% 5px 20%; /* Add padding to create space around the progress bar */
+  width: 100%; /* Changed to 100vw to ensure full viewport width */
+  padding: 0; /* Removed padding to make the bar span the full width */
   background-color: #ddd;
-  box-sizing: border-box;
 }
 
 .progress-bar {
-  height: 30px;
+  height: 5px; /* Changed height to 5px for a thinner progress bar */
   background-color: #4caf50;
   transition: width 0.5s ease;
-  border-radius: 8px; /* Add border radius to the progress bar itself */
+  border-radius: 0; /* Removed border radius to match YouTube's style */
 }
 
 .progress-layer {
   height: 100%;
-  background-color: #e0ffe0; /* Light green background for contrast */
-  border-radius: 8px;
-  opacity: 0.6; /* Semi-transparent overlay */
+  background-color: transparent; /* Set to transparent to remove overlay effect */
+  border-radius: 0; /* Removed border radius */
+  opacity: 1; /* Set opacity to 1 for full visibility */
   width: 100%; /* This layer covers the entire container */
+}
+
+.progress-text {
+  display: block; /* Make sure it appears below the progress bar */
+  margin-top: 10px; /* Space above the text */
+  font-size: 14px; /* Adjust font size as needed */
+  color: #333; /* Different color for contrast */
+  text-align: center; /* Center the text */
 }

@@ -74,7 +74,6 @@ const ContextMenu = ({
     (e: any) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
         onContextmMenuRemove();
-        console.log("click");
       }
     },
     [menuRef, onContextmMenuRemove]
@@ -92,14 +91,6 @@ const ContextMenu = ({
     },
     [onContextmMenuRemove]
   );
-
-  // useEffect(() => {
-  //   window.addEventListener("click", (e: any) => {
-  //     e.stopPropagation();
-  //     console.log("click", e.target.classList.value);
-  //     console.log(menuRef.current && menuRef.current.contains(e.target));
-  //   });
-  // }, []);
 
   /** Check whether the menu button is visible */
   useEffect(() => {
