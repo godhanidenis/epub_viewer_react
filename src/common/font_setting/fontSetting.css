@@ -1,0 +1,17 @@
+.fontSelector {
+  display: inline-block;
+}
+
+.fontSelectorDropdown {
+  font-family: "Arial", sans-serif; /* Fallback font-family */
+  font-size: 16px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.fontSelectorDropdown:focus {
+  outline: none;
+  border-color: #007bff;
+}

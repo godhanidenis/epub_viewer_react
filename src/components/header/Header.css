@@ -1,0 +1,14 @@
+.container {
+  background-color: #3d4146;
+  height: 60px;
+  display: flex;
+  color: white;
+  justify-content: space-around;
+}
+
+.left-section,
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}

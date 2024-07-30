@@ -1,0 +1,37 @@
+.bookmark {
+  background-color: #ffffe0; /* Yellow background */
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.bookmark-header {
+  margin-bottom: 10px;
+}
+
+.bookmark-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.note-input {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.note-input input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.note-input button {
+  background-color: #f08080; /* Red background */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
