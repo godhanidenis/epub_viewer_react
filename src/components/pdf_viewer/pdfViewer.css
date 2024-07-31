@@ -1,6 +1,6 @@
 .navBtn {
   position: absolute;
-  top: 60%;
+  top: 55%;
   transform: translateY(-50%);
   font-size: 28px;
   color: #fc6b5f;
@@ -30,11 +30,9 @@
   background: #fff;
 }
 
-/* .eBook_outer > div {
-  padding: 25px !important;
-  width: 100% !important;
-  background: #fff;
-} */
+.eBook_outer > div {
+  height: 90dvh;
+}
 
 .epub-container {
   overflow: auto; /* Display scrollbar only when needed */

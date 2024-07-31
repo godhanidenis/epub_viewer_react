@@ -1,9 +1,9 @@
 .fontSelector {
   display: inline-block;
+  width: 100%;
 }
 
 .fontSelectorDropdown {
-  font-family: "Arial", sans-serif; /* Fallback font-family */
   font-size: 16px;
   padding: 5px;
   border: 1px solid #ccc;
@@ -11,7 +11,120 @@
   cursor: pointer;
 }
 
-.fontSelectorDropdown:focus {
-  outline: none;
-  border-color: #007bff;
+.fontSetting {
+  margin-top: 2rem;
+}
+
+.titel_text {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.range {
+  width: 85%;
+}
+
+.fontSize {
+  display: flex;
+  gap: 15px;
+  margin: 2rem 0 2rem 0;
+}
+.size {
+  color: rgb(97, 142, 255);
+}
+.sign {
+  color: rgb(134, 134, 134);
+}
+
+/* FOR SELECTION */
+.fontSelector {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.fontSelectorDropdown {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc !important;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.option {
+  width: 100%;
+  padding: 10px;
+}
+
+/* style for the dropdown  */
+.dropdown-container {
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dropdown-selected {
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  background: white;
+  transition: border-color 0.3s ease, border-radius 0.3s ease;
+}
+
+.dropdown-selected.open {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: #ccc;
+  border-color: #ccc;
+}
+
+.dropdown-arrow {
+  display: inline-block;
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+}
+
+.dropdown-arrow.down {
+  transform: rotate(0deg);
+}
+
+.dropdown-arrow.up {
+  transform: rotate(180deg);
+}
+
+.option-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 2px solid #ccc;
+  border-radius: 0 0 20px 20px;
+  overflow: hidden;
+  background: white;
+  position: absolute;
+  width: 98.8%;
+  z-index: 1;
+}
+
+.option {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.option:hover {
+  background-color: #f0f0f0;
+}
+
+.option + .option {
+  border-top: 1px solid #ccc;
+}
+
+.last-option {
+  border-radius: 0 0 20px 20px;
 }

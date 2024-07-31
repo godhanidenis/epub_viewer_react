@@ -5,8 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { cfiRangeSpliter } from "../../utils/commonUtil";
 import { RefContext } from "../../App";
 
+function hexToRgba(hex, alpha = 1) {
+  hex = hex.replace("#", "");
+  let r = parseInt(hex.substring(0, 2), 16);
+  let g = parseInt(hex.substring(2, 4), 16);
+  let b = parseInt(hex.substring(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
 const Highlight = () => {
   const highlights = useSelector((state: any) => state.book.highlights);
+  const { currentLocation } = useSelector((state: any) => state.book);
   const viewerRef = useContext(RefContext);
   const [notes, setNotes] = useState<string[]>(
     Array(highlights.length).fill("")
@@ -24,48 +33,58 @@ const Highlight = () => {
     const { startCfi } = splitCfi;
     viewerRef.current.setLocation(startCfi);
   };
+
   return (
     <>
-      {highlights.map((highlight, id) => (
-        <>
-          <div
-            className="bookmark"
-            key={id}
-            onClick={() => handleId(highlight.cfiRange)}
-          >
-            <div className="bookmark-header">
-              <h3>Bookmark - Show Page 0</h3>
-            </div>
-            <div className="bookmark-content">
-              <p>{highlight.content}</p>
-              <p>scs@sultanchandebooks.com...</p>
-              <div className="note-input">
-                <input
-                  type="text"
-                  placeholder="Add a note..."
-                  value={notes[id]}
-                  onChange={(event) => handleNoteChange(event, id)}
-                />
-                <button>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-arrow-right-short"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
-                    />
-                  </svg>
-                </button>
+      <div className="outer-bookmark">
+        {highlights.map((highlight, id) => (
+          <>
+            <div
+              className="bookmark"
+              key={id}
+              onClick={() => handleId(highlight.cfiRange)}
+            >
+              <div className="bookmark-header">
+                <p className="show-page">
+                  Bookmark - Show Page {currentLocation.currentPage}
+                </p>
               </div>
+              <div className="bookmark-content">
+                <p className="selected-text">{highlight.content}</p>
+                <div className="note-input">
+                  <input
+                    type="text"
+                    placeholder="Add a note..."
+                    value={notes[id]}
+                    onChange={(event) => handleNoteChange(event, id)}
+                    className="note-input-field"
+                  />
+                  <span className="note-divider"></span>
+                  <button className="note-input-button">
+                    <img
+                      src="/img/notesave.svg"
+                      alt="save"
+                      className="note-save"
+                    />
+                  </button>
+                </div>
+              </div>
+              <div
+                style={{
+                  backgroundColor: hexToRgba(highlight.color, 0.3),
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%",
+                  top: 0,
+                  left: 0,
+                  borderRadius: "10px",
+                  zIndex: -5,
+                }}
+              ></div>
             </div>
-          </div>
-        </>
-      ))}
+          </>
+        ))}
+      </div>
     </>
   );
 };

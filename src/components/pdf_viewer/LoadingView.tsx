@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import styled, { keyframes } from "styled-components";
 
 const LoadingView = () => {
@@ -27,9 +27,11 @@ const LoadingWrapper = styled.div`
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 30px;
+  height: 60px;
   margin: 30px 0;
   text-align: center;
+  z-index: 2;
+  background: #fff;
 `;
 
 const Content = styled.div`

@@ -1,0 +1,57 @@
+/* BookInfo.css */
+.toc-main {
+  overflow: auto; /* Display scrollbar only when needed */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+.container-toc {
+  display: flex;
+  padding: 24px 0;
+}
+
+.bookImg {
+  margin-right: 12px;
+  width: 44%;
+  min-width: 120px;
+  border-radius: 4px;
+  background: #eee;
+}
+
+.bookContent {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title-toc {
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: #333;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.info-toc {
+  font-size: 14px;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.chapter-outer {
+  padding: 5px 0;
+  border-bottom: 1px solid #cecece;
+  cursor: pointer;
+}
+
+.toc-chapter {
+  font-size: 14px;
+  position: relative;
+  color: black;
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.chapter-outer:hover .toc-chapter {
+  color: rgb(97, 142, 255);
+  transform: translateX(20px);
+}

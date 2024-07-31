@@ -100,21 +100,18 @@ const PdfViewer = () => {
         &lt;
       </div>
       <div className="eBook_outer">
-        {bookOption && bookOption && (
-          <ReactEpubViewer
-            url={EPUB_URL}
-            // url="./a.epub"
-            onPageChange={onPageChange}
-            viewerLayout={viewerLayout}
-            viewerStyle={bookStyle}
-            viewerOption={bookOption}
-            onBookInfoChange={onBookInfoChange}
-            onTocChange={onTocChange}
-            onSelection={onContextMenu}
-            loadingView={<LoadingView />}
-            ref={viewerRef}
-          />
-        )}
+        <ReactEpubViewer
+          url={EPUB_URL}
+          onPageChange={onPageChange}
+          viewerLayout={viewerLayout}
+          viewerStyle={bookStyle}
+          viewerOption={bookOption}
+          onBookInfoChange={onBookInfoChange}
+          onTocChange={onTocChange}
+          onSelection={onContextMenu}
+          loadingView={<LoadingView />}
+          ref={viewerRef}
+        />
       </div>
       <div className="nextBtn navBtn" onClick={() => onPageMove("NEXT")}>
         &gt;

@@ -8,7 +8,7 @@ const SideMenu = ({ name, body }: any) => {
   return (
     <div className="popup" key={name}>
       <div className="popup_inner">
-        <h1>{name}</h1>
+        <span className="title">{name}</span>
         <img
           src={"/img/close.svg"}
           alt="close"
