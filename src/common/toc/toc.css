@@ -52,6 +52,7 @@
 }
 
 .chapter-outer:hover .toc-chapter {
-  color: rgb(97, 142, 255);
+  /* color: rgb(97, 142, 255); */
+  color: #ff4a6e;
   transform: translateX(20px);
 }

@@ -29,7 +29,7 @@
 
   /* Position the tooltip */
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   top: 125%; /* Adjust as needed */
   left: 50%;
   margin-left: -60px; /* Use half of the tooltip width to center it */

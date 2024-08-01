@@ -5,8 +5,8 @@
 }
 
 .progress-bar {
-  height: 5px; /* Changed height to 5px for a thinner progress bar */
-  background-color: #4caf50;
+  height: 10px; /* Changed height to 5px for a thinner progress bar */
+  background-color: #ff4a6e;
   transition: width 0.5s ease;
   border-radius: 0; /* Removed border radius to match YouTube's style */
 }
@@ -20,9 +20,14 @@
 }
 
 .progress-text {
+  width: max-content;
   display: block; /* Make sure it appears below the progress bar */
-  margin-top: 10px; /* Space above the text */
   font-size: 14px; /* Adjust font size as needed */
   color: #333; /* Different color for contrast */
   text-align: center; /* Center the text */
+  margin: 0 auto;
+  padding: 3px 10px;
+  border-radius: 3px;
+  font-weight: bold;
+  background-color: turquoise;
 }

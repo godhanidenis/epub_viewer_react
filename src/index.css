@@ -14,3 +14,8 @@ body {
   font-family: "Poppins", "Roboto", -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
 }
+
+/* for full screen */
+::backdrop {
+  background: none !important;
+}

@@ -16,13 +16,15 @@
 }
 
 .titel_text {
+  font-weight: bold;
   font-size: 14px;
-  font-weight: 400;
   letter-spacing: 0.5px;
 }
 
 .range {
   width: 85%;
+  color: #ff4a6e !important;
+  background-color: #ff4a6e !important;
 }
 
 .fontSize {
@@ -31,7 +33,7 @@
   margin: 2rem 0 2rem 0;
 }
 .size {
-  color: rgb(97, 142, 255);
+  color: #ff4a6e;
 }
 .sign {
   color: rgb(134, 134, 134);

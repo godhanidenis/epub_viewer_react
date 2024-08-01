@@ -46,12 +46,12 @@ const Highlight = () => {
             >
               <div className="bookmark-header">
                 <p className="show-page">
-                  Bookmark - Show Page {currentLocation.currentPage}
+                  Bookmark - Show Page {highlight.pageNum}
                 </p>
               </div>
               <div className="bookmark-content">
                 <p className="selected-text">{highlight.content}</p>
-                <div className="note-input">
+                {/* <div className="note-input">
                   <input
                     type="text"
                     placeholder="Add a note..."
@@ -67,7 +67,7 @@ const Highlight = () => {
                       className="note-save"
                     />
                   </button>
-                </div>
+                </div> */}
               </div>
               <div
                 style={{

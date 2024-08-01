@@ -26,8 +26,11 @@ const LoadingWrapper = styled.div`
 
 const Wrapper = styled.div`
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 60px;
+  height: 100%;
   margin: 30px 0;
   text-align: center;
   z-index: 2;

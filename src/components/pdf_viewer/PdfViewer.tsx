@@ -1,6 +1,6 @@
 import "./pdfViewer.css";
-import { useRef, useState, useEffect, useContext } from "react";
-import { ReactEpubViewer, EpubViewer } from "react-epub-viewer";
+import { useState, useEffect, useContext } from "react";
+import { ReactEpubViewer } from "react-epub-viewer";
 import { useDispatch, useSelector } from "react-redux";
 import { updateBook, updateCurrentPage, updateToc } from "../../slices/book";
 import ContextMenu from "../contex-menu/ContextMenu";

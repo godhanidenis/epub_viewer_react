@@ -20,10 +20,12 @@
 
 .prevBtn {
   left: 5%;
+  user-select: none;
 }
 
 .nextBtn {
   right: 5%;
+  user-select: none;
 }
 
 .eBook_outer {
