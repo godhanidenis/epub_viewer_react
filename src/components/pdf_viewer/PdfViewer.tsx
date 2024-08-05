@@ -94,6 +94,11 @@ const PdfViewer = () => {
     loadFile();
   }, []);
 
+  const viewerElement = viewerRef.current;
+  if (viewerElement && viewerElement.children.length >= 2) {
+    viewerElement.removeChild(viewerElement.children[0]);
+  }
+
   return (
     <>
       <div className="prevBtn navBtn" onClick={() => onPageMove("PREV")}>
