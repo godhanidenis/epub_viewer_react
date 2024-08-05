@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleModal, updateBookOption } from "../../slices/fontSetting";
 
 const Header = ({ fullScreenToggler }: any) => {
+  const MEDIA_BASE_URL = process.env.REACT_APP_MEDIA_BASE_URL;
   const dispatch = useDispatch();
   const bookOption = useSelector((state: any) => state.fontSetting.bookOption);
 
@@ -23,31 +24,31 @@ const Header = ({ fullScreenToggler }: any) => {
       <div className="left-section">
         <HederButton
           name="refresh"
-          icon="\img\Refresh.png"
+          icon={`${MEDIA_BASE_URL}/Refresh.png`}
           onClick={() => window.location.reload()}
         />
         <HederButton
           name="fontSize"
-          icon="\img\Fontstyle.png"
+          icon={`${MEDIA_BASE_URL}/Fontstyle.png`}
           onClick={() => toggleModel("fontsetting")}
         />
         <span className="divider"></span>
         <HederButton
           name="fullscreen"
-          icon="\img\zoomin.png"
+          icon={`${MEDIA_BASE_URL}/zoomin.png`}
           onClick={() => fullScreenToggler()}
         />
         <span className="divider"></span>
         <HederButton
           name="multiview"
-          icon="\img\bookpreview.png"
+          icon={`${MEDIA_BASE_URL}/bookpreview.png`}
           onClick={() => handleMultiView()}
         />
       </div>
       <div className="right-section">
         <HederButton
           name="book mark"
-          icon="\img\wishlist.png"
+          icon={`${MEDIA_BASE_URL}/wishlist.png`}
           onClick={() => toggleModel("bookmark")}
         />
         <HederButton

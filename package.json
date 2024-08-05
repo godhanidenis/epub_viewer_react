@@ -4,6 +4,7 @@
   "description": "Epub viewer for React.js powered by Epub.js",
   "private": true,
   "main": "lib/modules/index.js",
+  "homepage": "/media/epub_viewer",
   "scripts": {
     "start": "react-scripts start",
     "prebuild": "react-scripts test --watchAll=false --passWithNoTests",

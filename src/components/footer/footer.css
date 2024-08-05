@@ -6,7 +6,7 @@
 
 .progress-bar {
   height: 10px; /* Changed height to 5px for a thinner progress bar */
-  background-color: #ff4a6e;
+  background-color: darkorange;
   transition: width 0.5s ease;
   border-radius: 0; /* Removed border radius to match YouTube's style */
 }

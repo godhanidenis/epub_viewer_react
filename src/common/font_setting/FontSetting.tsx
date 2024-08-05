@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateBookStyle } from "../../slices/fontSetting";
 
 const Option = () => {
+  const MEDIA_BASE_URL = process.env.REACT_APP_MEDIA_BASE_URL;
   const dispatch = useDispatch();
   const bookStyle = useSelector((state: any) => state.fontSetting.bookStyle);
   const [fontFamily, setFontFamily] = useState(bookStyle.fontFamily);
@@ -47,7 +48,7 @@ const Option = () => {
         >
           {fontFamily}
           <span className={`dropdown-arrow ${isOpen ? "up" : "down"}`}>
-            <img src="/img/down.svg" alt="arrow" />
+            <img src={`${MEDIA_BASE_URL}/down.svg`} alt="arrow" />
           </span>
         </div>
         {isOpen && (
