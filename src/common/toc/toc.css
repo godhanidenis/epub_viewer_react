@@ -3,6 +3,7 @@
   overflow: auto; /* Display scrollbar only when needed */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
+  padding-bottom: 17px;
 }
 .container-toc {
   display: flex;

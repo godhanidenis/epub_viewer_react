@@ -11,6 +11,7 @@
   margin-bottom: 20px;
   cursor: pointer;
   position: relative;
+  width: 85%;
 }
 
 .bookmark-header {
@@ -35,6 +36,7 @@
   padding: 8px 12px;
   border-radius: 4px;
   cursor: pointer;
+  width: 15%;
 }
 
 .show-page {
@@ -60,14 +62,13 @@
 .note-input {
   display: flex;
   align-items: center;
-  margin-top: 10px;
   border-radius: 4px;
   overflow: hidden;
   background: #f3f3f3;
 }
 
 .note-input-field {
-  flex-grow: 1;
+  width: 85%;
   border: none !important;
   padding: 8px;
   outline: none;
@@ -96,13 +97,58 @@
 }
 
 .note-divider {
-  height: 42px;
+  height: 43px;
   width: 1px;
   background-color: #9a9898;
   margin: 0 5px 0 0;
 }
 
-.note-save {
+.note-save,
+.delete-img {
   height: 25px;
   width: 25px;
+}
+
+/* for multiple notes */
+.note {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 7px;  
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.note-text {
+  width: 80%;
+  overflow-wrap: break-word;
+}
+
+.note-date {
+  display: block;
+  margin-top: 5px;
+  font-size: smaller;
+  white-space: nowrap;
+  color: darkcyan;
+}
+
+.no-bookmark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #9a9898;
+}
+
+/* loading-view */
+.loading-view {
+  position: absolute;
+  height: 95%;
+  width: 90%;
+  top: 5%;
+  opacity: 0.6;  
+  z-index: 1;
 }

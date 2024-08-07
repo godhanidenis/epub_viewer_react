@@ -2,11 +2,20 @@ import "./pdfViewer.css";
 import { useState, useEffect, useContext } from "react";
 import { ReactEpubViewer } from "react-epub-viewer";
 import { useDispatch, useSelector } from "react-redux";
-import { updateBook, updateCurrentPage, updateToc } from "../../slices/book";
+import {
+  getHighlight,
+  pushHighlight,
+  updateBook,
+  updateCurrentPage,
+  updateToc,
+} from "../../slices/book";
 import ContextMenu from "../contex-menu/ContextMenu";
 import useHighlight from "../../hooks/useHighlight";
 import { RefContext } from "../../App";
 import LoadingView from "./LoadingView";
+import NoteServices from "../../services/NoteServices";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const viewerLayout = {
   MIN_VIEWER_WIDTH: 300,
@@ -33,7 +42,9 @@ const PdfViewer = () => {
     onUpdateHighlight,
   } = useHighlight(viewerRef, setIsContextMenu, bookStyle, bookOption.flow);
 
-  const onContextmMenuRemove = () => setIsContextMenu(false);
+  const onContextmMenuRemove = () => {
+    setIsContextMenu(false);
+  };
 
   // CHANGE PAGE LOGIC
   const onPageMove = (type: any) => {
@@ -53,12 +64,18 @@ const PdfViewer = () => {
   };
 
   const queryParams = new URLSearchParams(window.location.search);
-  const id = queryParams.get("id") || "";
+  const bookId = queryParams.get("id") || "";
+  const userId = queryParams.get("user") || "";
+
+  if (bookId || userId) {
+    window.localStorage.setItem("bookId", bookId);
+    window.localStorage.setItem("userId", userId);
+  }
 
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [EPUB_URL, setUrl] = useState("");
 
-  const URL = `${BASE_URL}/api/book-detail/${id}/?format=json`;
+  const URL = `${BASE_URL}/api/book-detail/${bookId}/?format=json`;
 
   const loadFile = async () => {
     //console.log("fetching file..");
@@ -91,6 +108,17 @@ const PdfViewer = () => {
   };
 
   useEffect(() => {
+    const loadAllHighlights = async () => {
+      try {
+        const allHighlight = await NoteServices.getAllNotes();
+        dispatch(getHighlight(allHighlight.notes));
+      } catch (error) {
+        console.error("Error loading highlights:", error);
+      }
+    };
+    if (bookId && userId) {
+      loadAllHighlights();
+    }
     loadFile();
   }, []);
 
@@ -130,6 +158,18 @@ const PdfViewer = () => {
         onRemoveHighlight={onRemoveHighlight}
         onUpdateHighlight={onUpdateHighlight}
         onContextmMenuRemove={onContextmMenuRemove}
+      />
+
+      <ToastContainer
+        position="top-left"
+        autoClose={3500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
       />
     </>
   );

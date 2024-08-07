@@ -31,6 +31,7 @@ const initialState = {
   model: initialModel,
   bookStyle: initialBookStyle,
   bookOption: initialBookOption,
+  bookMarkLoading: false,
 };
 
 // SLICE
@@ -53,10 +54,17 @@ const fontSlice = createSlice({
     updateBookOption(state, action) {
       state.bookOption.flow = action.payload;
     },
+    changeLoadingState(state, action) {
+      state.bookMarkLoading = action.payload;
+    },
   },
 });
 
-export const { handleModal, updateBookStyle, updateBookOption } =
-  fontSlice.actions;
+export const {
+  handleModal,
+  updateBookStyle,
+  updateBookOption,
+  changeLoadingState,
+} = fontSlice.actions;
 
 export default fontSlice.reducer;
