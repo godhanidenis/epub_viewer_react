@@ -64,8 +64,8 @@ const PdfViewer = () => {
   };
 
   const queryParams = new URLSearchParams(window.location.search);
-  const bookId = queryParams.get("id") || "";
-  const userId = queryParams.get("user") || "";
+  const bookId = queryParams.get("book_id") || "";
+  const userId = queryParams.get("user_id") || "";
 
   if (bookId || userId) {
     window.localStorage.setItem("bookId", bookId);

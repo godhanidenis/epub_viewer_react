@@ -216,7 +216,7 @@ const Highlight = () => {
           </div>
         </>
       ) : (
-        <div className="no-bookmark">Empty Bookmark</div>
+        <div className="no-bookmark">No Bookmarks</div>
       )}
     </>
   );
