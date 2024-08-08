@@ -154,13 +154,13 @@ const Highlight = () => {
                           </span>
                           {noteId === note.id && noteLoading ? (
                             <img
-                              src="/media/epub_viewer_v1/img/loading.svg"
+                              src={`${MEDIA_BASE_URL}/loading.svg`}
                               alt="Loading..."
                               className="note-save"
                             />
                           ) : (
                             <img
-                              src="/media/epub_viewer_v1/img/delete.svg"
+                              src={`${MEDIA_BASE_URL}/delete.svg`}
                               alt="delete"
                               className="delete-img"
                               onClick={() => handleDeleteNote(note.id)}
@@ -186,7 +186,7 @@ const Highlight = () => {
                         >
                           {bookMarkId === highlight.id && noteLoading ? (
                             <img
-                              src="/media/epub_viewer_v1/img/loading.svg"
+                              src={`${MEDIA_BASE_URL}/loading.svg`}
                               alt="Loading..."
                               className="note-save"
                             />
