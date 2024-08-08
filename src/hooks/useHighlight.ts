@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // slices
 import { pushHighlight, popHighlight, updateHighlight } from "../slices/book";
+import { toast } from "react-toastify";
 // import { newSnackbar } from "../../slices/snackbar";
 // utils
 import {
@@ -245,14 +246,21 @@ const useHighlight = (
         const node = getNodefromCfi(highlight.paragraphCfi);
         if (!node) return;
 
-        viewerRef.current.onHighlight(
-          highlight.cfiRange,
-          (e: any) => {
-            onClickHighlight(e.target);
-            setIsContextMenu(true);
-          },
-          highlight.color
-        );
+        try {
+          viewerRef.current.onHighlight(
+            highlight.cfiRange,
+            (e: any) => {
+              onClickHighlight(e.target);
+              setIsContextMenu(true);
+            },
+            highlight.color
+          );
+        } catch (error) {
+          console.error("You are Trying to select image", error);
+          dispatch(popHighlight(highlight.key));
+          toast.warn("You Are Trying To Select Image");
+          setIsContextMenu(false);
+        }
 
         iframeWin.getSelection().removeAllRanges();
       }
