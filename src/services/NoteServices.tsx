@@ -8,7 +8,7 @@ const headers = {
 const getAllNotes = async () => {
   if (!bookId && !userId) return;
   const response = await fetch(
-    `${process.env.REACT_APP_NOTE_URL}?book_id=${bookId}&user_id=${userId}`,
+    `${process.env.REACT_APP_BASE_URL}/api/saveNote/?book_id=${bookId}&user_id=${userId}`,
     {
       method: "GET",
       headers: headers,
@@ -21,11 +21,14 @@ const getAllNotes = async () => {
 //save note on the basis of bookId & userToken
 const saveNote = async (data: any) => {
   if (!bookId && !userId) return;
-  let response = await fetch(`${process.env.REACT_APP_NOTE_URL}`, {
-    method: "POST",
-    headers: headers,
-    body: JSON.stringify({ ...data, user_id: userId, book_id: bookId }),
-  });
+  let response = await fetch(
+    `${process.env.REACT_APP_BASE_URL}/api/saveNote/`,
+    {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify({ ...data, user_id: userId, book_id: bookId }),
+    }
+  );
   let res = await response.json();
   return res;
 };
@@ -33,11 +36,14 @@ const saveNote = async (data: any) => {
 // save pericular note
 const saveNoteContent = async (data: any) => {
   if (!bookId && !userId) return;
-  let response = await fetch(`${process.env.REACT_APP_SAVE_NOTE_CONTENT}`, {
-    method: "POST",
-    headers: headers,
-    body: JSON.stringify(data),
-  });
+  let response = await fetch(
+    `${process.env.REACT_APP_BASE_URL}/api/saveNoteData/`,
+    {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(data),
+    }
+  );
   let res = await response.json();
   return res;
 };
@@ -46,7 +52,7 @@ const saveNoteContent = async (data: any) => {
 const deleteNoteContent = async (contentId: any) => {
   if (!bookId && !userId) return;
   let response = await fetch(
-    `${process.env.REACT_APP_SAVE_NOTE_CONTENT}?id=${contentId}`,
+    `${process.env.REACT_APP_BASE_URL}/api/saveNoteData/?id=${contentId}`,
     {
       method: "DELETE",
       headers: headers,
@@ -60,7 +66,7 @@ const deleteNoteContent = async (contentId: any) => {
 const deleteNote = async (bookMarkId: any) => {
   if (!bookId && !userId) return;
   let response = await fetch(
-    `${process.env.REACT_APP_NOTE_URL}?note_id=${bookMarkId}&user_id=${userId}&book_id=${bookId}`,
+    `${process.env.REACT_APP_BASE_URL}/api/saveNote/?note_id=${bookMarkId}&user_id=${userId}&book_id=${bookId}`,
     {
       method: "DELETE",
       headers: headers,
