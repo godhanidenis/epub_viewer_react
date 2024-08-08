@@ -8,6 +8,7 @@ import NoteServices from "../../services/NoteServices";
 import { addNoteContent, removeNoteContent } from "../../slices/book";
 import { toast } from "react-toastify";
 import LoadingView from "../../components/pdf_viewer/LoadingView";
+import { bookId, userId } from "../../components/pdf_viewer/PdfViewer";
 
 function hexToRgba(hex, alpha = 1) {
   hex = hex.replace("#", "");
@@ -53,11 +54,6 @@ const Highlight = () => {
     viewerRef.current.setLocation(startCfi);
   };
 
-  const queryParams = new URLSearchParams(window.location.search);
-  const bookId = queryParams.get("id") || "";
-  // const userId = queryParams.get("user") || "";
-  const userId = "3061";
-
   const handleSaveNote = (e, bookMarkId) => {
     setBookMarkId(bookMarkId);
     e.stopPropagation();
@@ -86,7 +82,9 @@ const Highlight = () => {
       }
       setBookMarkId(null);
     };
-    saveNote();
+    if (bookId && userId) {
+      saveNote();
+    }
   };
 
   const handleDeleteNote = (contentId) => {
@@ -108,7 +106,9 @@ const Highlight = () => {
       }
       setNoteId(null);
     };
-    removeNote();
+    if (bookId && userId) {
+      removeNote();
+    }
   };
 
   return (
@@ -137,66 +137,69 @@ const Highlight = () => {
                   </div>
                   <div className="bookmark-content">
                     <p className="selected-text">{highlight.content}</p>
-                    {highlight.note_content.map((note) => (
-                      <div
-                        key={note.id}
-                        className="note"
-                        style={{
-                          backgroundColor: hexToRgba(highlight.color, 0.1),
-                        }}
-                      >
-                        <span className="note-text">
-                          {note.note_content}
-                          <span className="note-date">
-                            Created at {formatDate(note.createTime)}
+                    {userId &&
+                      highlight.note_content.map((note) => (
+                        <div
+                          key={note.id}
+                          className="note"
+                          style={{
+                            backgroundColor: hexToRgba(highlight.color, 0.1),
+                          }}
+                        >
+                          <span className="note-text">
+                            {note.note_content}
+                            <span className="note-date">
+                              Created at {formatDate(note.createTime)}
+                            </span>
                           </span>
-                        </span>
-                        {noteId === note.id && noteLoading ? (
-                          <img
-                            src="/media/epub_viewer_v1/img/loading.svg"
-                            alt="Loading..."
-                            className="note-save"
-                          />
-                        ) : (
-                          <img
-                            src="/media/epub_viewer_v1/img/delete.svg"
-                            alt="delete"
-                            className="delete-img"
-                            onClick={() => handleDeleteNote(note.id)}
-                          />
-                        )}
+                          {noteId === note.id && noteLoading ? (
+                            <img
+                              src="/media/epub_viewer_v1/img/loading.svg"
+                              alt="Loading..."
+                              className="note-save"
+                            />
+                          ) : (
+                            <img
+                              src="/media/epub_viewer_v1/img/delete.svg"
+                              alt="delete"
+                              className="delete-img"
+                              onClick={() => handleDeleteNote(note.id)}
+                            />
+                          )}
+                        </div>
+                      ))}
+                    {userId && (
+                      <div className="note-input">
+                        <input
+                          type="text"
+                          placeholder="Add a note..."
+                          value={notes[highlight.id]}
+                          onChange={(event) =>
+                            handleNoteChange(event, userId ? highlight.id : id)
+                          }
+                          className="note-input-field"
+                        />
+                        <span className="note-divider"></span>
+                        <button
+                          className="note-input-button"
+                          onClick={(e) => handleSaveNote(e, highlight.id)}
+                        >
+                          {bookMarkId === highlight.id && noteLoading ? (
+                            <img
+                              src="/media/epub_viewer_v1/img/loading.svg"
+                              alt="Loading..."
+                              className="note-save"
+                            />
+                          ) : (
+                            <img
+                              src={`${MEDIA_BASE_URL}/notesave.svg`}
+                              alt="save"
+                              className="note-save"
+                            />
+                          )}
+                        </button>
                       </div>
-                    ))}
-                    <div className="note-input">
-                      <input
-                        type="text"
-                        placeholder="Add a note..."
-                        value={notes[highlight.id]}
-                        onChange={(event) =>
-                          handleNoteChange(event, highlight.id)
-                        }
-                        className="note-input-field"
-                      />
-                      <span className="note-divider"></span>
-                      <button
-                        className="note-input-button"
-                        onClick={(e) => handleSaveNote(e, highlight.id)}
-                      >
-                        {bookMarkId === highlight.id && noteLoading ? (
-                          <img
-                            src="/media/epub_viewer_v1/img/loading.svg"
-                            alt="Loading..."
-                            className="note-save"
-                          />
-                        ) : (
-                          <img
-                            src={`${MEDIA_BASE_URL}/notesave.svg`}
-                            alt="save"
-                            className="note-save"
-                          />
-                        )}
-                      </button>
-                    </div>
+                    )}
                   </div>
                   <div
                     style={{

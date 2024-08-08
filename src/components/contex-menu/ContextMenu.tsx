@@ -16,7 +16,7 @@ import { RootState } from "../../slices";
 import NoteServices from "../../services/NoteServices";
 import { getHighlight } from "../../slices/book";
 import { toast } from "react-toastify";
-import { RefContext } from "../../App";
+import { bookId, userId } from "../pdf_viewer/PdfViewer";
 import { changeLoadingState } from "../../slices/fontSetting";
 
 const ContextMenu = ({
@@ -47,8 +47,6 @@ const ContextMenu = ({
   const [height, setHeight] = useState<number>(0);
   const [y, setY] = useState<number>(selection.y);
   const dispatch = useDispatch();
-  const bookId = window.localStorage.getItem("bookId");
-  const userId = window.localStorage.getItem("userId");
 
   const ColorList = colorList.map((color) => (
     <ColorItem

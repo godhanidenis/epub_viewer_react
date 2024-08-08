@@ -26,6 +26,11 @@ const viewerLayout = {
 };
 export const contextmenuWidth = 160;
 
+const queryParams = new URLSearchParams(window.location.search);
+const bookId = queryParams.get("book_id") || "";
+const userId = queryParams.get("user_id") || "";
+export { bookId, userId };
+
 const PdfViewer = () => {
   const viewerRef = useContext(RefContext);
   const dispatch = useDispatch();
@@ -62,15 +67,6 @@ const PdfViewer = () => {
     const result = onSelection(cfiRange);
     setIsContextMenu(result);
   };
-
-  const queryParams = new URLSearchParams(window.location.search);
-  const bookId = queryParams.get("book_id") || "";
-  const userId = queryParams.get("user_id") || "";
-
-  if (bookId || userId) {
-    window.localStorage.setItem("bookId", bookId);
-    window.localStorage.setItem("userId", userId);
-  }
 
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [EPUB_URL, setUrl] = useState("");

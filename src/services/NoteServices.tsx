@@ -1,5 +1,4 @@
-const bookId = window.localStorage.getItem("bookId");
-const userId = window.localStorage.getItem("userId");
+import { bookId, userId } from "../components/pdf_viewer/PdfViewer";
 
 const headers = {
   "Content-Type": "application/json",

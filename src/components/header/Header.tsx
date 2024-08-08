@@ -19,9 +19,6 @@ const Header = ({ fullScreenToggler }: any) => {
     dispatch(updateBookOption(flow));
   };
 
-  const bookId = window.localStorage.getItem("bookId");
-  const userId = window.localStorage.getItem("userId");
-
   return (
     <div className="container">
       <div className="left-section">
@@ -49,13 +46,11 @@ const Header = ({ fullScreenToggler }: any) => {
         />
       </div>
       <div className="right-section">
-        {userId && bookId && (
-          <HederButton
-            name="book mark"
-            icon={`${MEDIA_BASE_URL}/wishlist.png`}
-            onClick={() => toggleModel("bookmark")}
-          />
-        )}
+        <HederButton
+          name="book mark"
+          icon={`${MEDIA_BASE_URL}/wishlist.png`}
+          onClick={() => toggleModel("bookmark")}
+        />
         <HederButton
           name="show notebook"
           icon={false}
