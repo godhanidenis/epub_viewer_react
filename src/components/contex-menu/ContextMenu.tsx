@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext, useMemo } from "react";
 import { useState, useEffect, useCallback, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // components
 import Wrapper from "../../common/contextMenu/Wrapper";
 import ColorItem from "../../common/contextMenu/ColorItem";
@@ -13,6 +13,11 @@ import { contextmenuWidth } from "../pdf_viewer/PdfViewer";
 import Highlight, { Color } from "../../types/highlight";
 import Selection from "../../types/selection";
 import { RootState } from "../../slices";
+import NoteServices from "../../services/NoteServices";
+import { getHighlight } from "../../slices/book";
+import { toast } from "react-toastify";
+import { RefContext } from "../../App";
+import { changeLoadingState } from "../../slices/fontSetting";
 
 const ContextMenu = ({
   active,
@@ -38,9 +43,12 @@ const ContextMenu = ({
   const [display, setDisplay] = useState<boolean>(false);
   const [isEraseBtn, setIsEraseBtn] = useState<boolean>(false);
   const [isReverse, setIsReverse] = useState<boolean>(false);
-
+  const [apiCall, setApiCall] = useState<boolean>(false);
   const [height, setHeight] = useState<number>(0);
   const [y, setY] = useState<number>(selection.y);
+  const dispatch = useDispatch();
+  const bookId = window.localStorage.getItem("bookId");
+  const userId = window.localStorage.getItem("userId");
 
   const ColorList = colorList.map((color) => (
     <ColorItem
@@ -61,8 +69,27 @@ const ContextMenu = ({
 
     onRemoveHighlight(highlight.key, highlight.cfiRange);
     onContextmMenuRemove();
-
     setIsEraseBtn(false);
+
+    const removeBookMark = async () => {
+      dispatch(changeLoadingState(true));
+      try {
+        const response = await NoteServices.deleteNote(highlight.id);
+        if (response.message !== "all records fetched successfully")
+          return toast.error("Opps ! Highlight could not be removed.");
+        dispatch(getHighlight(response.notes));
+        toast.success("Your Highlight has been removed successfully.");
+        dispatch(changeLoadingState(false));
+      } catch (error) {
+        console.error("Error Remove highlights:", error);
+        dispatch(changeLoadingState(false));
+      } finally {
+        dispatch(changeLoadingState(false));
+      }
+    };
+    if (bookId && userId) {
+      removeBookMark();
+    }
   }, [highlight, onRemoveHighlight, onContextmMenuRemove]);
 
   /**
@@ -74,11 +101,38 @@ const ContextMenu = ({
     (e: any) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
         onContextmMenuRemove();
-        console.log("click");
+        setApiCall(true);
       }
     },
     [menuRef, onContextmMenuRemove]
   );
+
+  useEffect(() => {
+    const saveBookmark = async () => {
+      dispatch(changeLoadingState(true));
+      const bookMark = { ...highlight };
+      delete bookMark.note_content;
+      try {
+        const response = await NoteServices.saveNote(bookMark);
+        if (response.message !== "all records fetched successfully")
+          return toast.error("Opps ! Highlight could not be saved.");
+        dispatch(getHighlight(response.notes));
+        toast.success("Your Highlight has been saved successfully.");
+        dispatch(changeLoadingState(false));
+      } catch (error) {
+        console.error("Error saving note:", error);
+        dispatch(changeLoadingState(false));
+      } finally {
+        dispatch(changeLoadingState(false));
+      }
+    };
+
+    if (apiCall && !display && bookId && userId) {
+      saveBookmark();
+      setApiCall(false);
+      setDisplay(false);
+    }
+  }, [apiCall, display]);
 
   /**
    * Arrow event
@@ -92,14 +146,6 @@ const ContextMenu = ({
     },
     [onContextmMenuRemove]
   );
-
-  // useEffect(() => {
-  //   window.addEventListener("click", (e: any) => {
-  //     e.stopPropagation();
-  //     console.log("click", e.target.classList.value);
-  //     console.log(menuRef.current && menuRef.current.contains(e.target));
-  //   });
-  // }, []);
 
   /** Check whether the menu button is visible */
   useEffect(() => {

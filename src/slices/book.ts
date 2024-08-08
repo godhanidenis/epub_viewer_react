@@ -92,6 +92,26 @@ const bookSlice = createSlice({
         .indexOf(action.payload);
       state.highlights.splice(idx, 1);
     },
+    //first time set highlight
+    getHighlight(state, action) {
+      state.highlights = action.payload;
+    },
+    // remove note content
+    removeNoteContent(state, action) {
+      state.highlights.map((highlight) => {
+        highlight.note_content = highlight.note_content.filter(
+          (note) => note.id !== action.payload
+        );
+      });
+    },
+    // add note content
+    addNoteContent(state, action) {      
+      state.highlights.map((highlight) => {
+        if (highlight.id === action.payload.bookMarkId) {
+          highlight.note_content.push(action.payload.noteData);
+        }
+      });
+    },
   },
 });
 
@@ -104,6 +124,9 @@ export const {
   pushHighlight,
   updateHighlight,
   popHighlight,
+  getHighlight,
+  removeNoteContent,
+  addNoteContent,
 } = bookSlice.actions;
 
 export default bookSlice.reducer;

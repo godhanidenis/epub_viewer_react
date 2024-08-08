@@ -6,16 +6,22 @@ const Footer = () => {
   const { totalPage, currentPage } = useSelector(
     (state: any) => state.book.currentLocation
   );
-  const percent = ((currentPage / totalPage) * 100).toFixed(0);
+  const percent = Number(((currentPage / totalPage) * 100).toFixed(0));
 
   return (
-    <div className="progress-container">
-      <div className="progress-layer"></div>
-      <div className="progress-bar" style={{ width: `${percent}%` }}></div>
-      <span>
-        {percent}% - Location - {currentPage} of {totalPage}
+    <>
+      <div className="progress-container">
+        <div className="progress-layer"></div>
+        <div
+          className="progress-bar"
+          style={{ width: `${isNaN(percent) ? 0 : percent}%` }}
+        ></div>
+      </div>
+      <span className="progress-text">
+        {isNaN(percent) ? 0 : percent}% - Location - {currentPage} of{" "}
+        {totalPage}
       </span>
-    </div>
+    </>
   );
 };
 

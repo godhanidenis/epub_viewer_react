@@ -20,7 +20,7 @@ const Container = styled.button`
   border-radius: 6px;
   cursor: pointer;
   outline: none;
-
+  border: none;
   &:focus,
   &:hover {
     color: #fff;

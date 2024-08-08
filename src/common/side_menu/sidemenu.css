@@ -1,23 +1,29 @@
 .popup {
   display: flex;
-  padding: 2%;
+  padding: 16px 24px 24px 24px;
   flex-direction: column;
   position: fixed;
-  width: 340px;
+  width: 270px;
   max-width: 95vw;
-  height: 80vh;
-  top: 65px;
+  height: 100%;
+  top: 0px;
   right: 0;
   z-index: 2;
   overflow-y: auto;
   box-shadow: -4px 0 8px 0 rgba(0, 0, 0, 0.16);
   background-color: #fff;
-  border-radius: 16px 0 0 16px;
+  border-radius: 6px 0 0 6px;
   transition: transform 0.3s ease-in-out;
+  overflow-y: auto;
 }
 
 .popup_inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.title {
+  font-size: 21px;
+  font-weight: 500;
 }

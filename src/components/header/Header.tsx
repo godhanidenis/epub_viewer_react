@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleModal, updateBookOption } from "../../slices/fontSetting";
 
 const Header = ({ fullScreenToggler }: any) => {
+  const MEDIA_BASE_URL = process.env.REACT_APP_MEDIA_BASE_URL;
   const dispatch = useDispatch();
   const bookOption = useSelector((state: any) => state.fontSetting.bookOption);
 
@@ -18,41 +19,46 @@ const Header = ({ fullScreenToggler }: any) => {
     dispatch(updateBookOption(flow));
   };
 
+  const bookId = window.localStorage.getItem("bookId");
+  const userId = window.localStorage.getItem("userId");
+
   return (
     <div className="container">
       <div className="left-section">
-        {/* <CustomTitle title="Back to Library" onClick={() => goToLib()} /> */}
         <HederButton
           name="refresh"
-          icon="fa fa-refresh lg"
+          icon={`${MEDIA_BASE_URL}/Refresh.png`}
           onClick={() => window.location.reload()}
         />
         <HederButton
           name="fontSize"
-          icon="fa fa-font lg"
+          icon={`${MEDIA_BASE_URL}/Fontstyle.png`}
           onClick={() => toggleModel("fontsetting")}
         />
+        <span className="divider"></span>
         <HederButton
           name="fullscreen"
-          icon="fa fa-arrows-alt lg"
+          icon={`${MEDIA_BASE_URL}/zoomin.png`}
           onClick={() => fullScreenToggler()}
         />
-        {/* <HederButton name="search" icon="fa-window-maximize lg" onClick={() => spreadOption()} /> */}
+        <span className="divider"></span>
         <HederButton
           name="multiview"
-          icon="fa fa-columns lg"
+          icon={`${MEDIA_BASE_URL}/bookpreview.png`}
           onClick={() => handleMultiView()}
         />
       </div>
       <div className="right-section">
-        <HederButton
-          name="bookmark"
-          icon="fa fa-bookmark lg"
-          onClick={() => toggleModel("bookmark")}
-        />
+        {userId && bookId && (
+          <HederButton
+            name="book mark"
+            icon={`${MEDIA_BASE_URL}/wishlist.png`}
+            onClick={() => toggleModel("bookmark")}
+          />
+        )}
         <HederButton
           name="show notebook"
-          icon="fa fa-bookmark lg"
+          icon={false}
           onClick={() => toggleModel("content")}
         />
       </div>

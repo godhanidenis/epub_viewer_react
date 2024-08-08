@@ -1,9 +1,10 @@
 {
-  "name": "epub_viewer",
+  "name": "epub_viewer_v1",
   "version": "0.1.3",
   "description": "Epub viewer for React.js powered by Epub.js",
   "private": true,
   "main": "lib/modules/index.js",
+  "homepage": "/media/epub_viewer_v1",
   "scripts": {
     "start": "react-scripts start",
     "prebuild": "react-scripts test --watchAll=false --passWithNoTests",

@@ -10,5 +10,11 @@
 .right-section {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem;
+}
+
+.divider {
+  height: 45%;
+  width: 1px;
+  background-color: white;
 }

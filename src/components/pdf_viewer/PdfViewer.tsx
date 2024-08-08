@@ -1,13 +1,21 @@
 import "./pdfViewer.css";
-import { useRef, useState, useEffect, useContext } from "react";
-import { ReactEpubViewer, EpubViewer } from "react-epub-viewer";
+import { useState, useEffect, useContext } from "react";
+import { ReactEpubViewer } from "react-epub-viewer";
 import { useDispatch, useSelector } from "react-redux";
-import { updateBook, updateCurrentPage, updateToc } from "../../slices/book";
+import {
+  getHighlight,
+  pushHighlight,
+  updateBook,
+  updateCurrentPage,
+  updateToc,
+} from "../../slices/book";
 import ContextMenu from "../contex-menu/ContextMenu";
 import useHighlight from "../../hooks/useHighlight";
 import { RefContext } from "../../App";
 import LoadingView from "./LoadingView";
-import Footer from "../footer/Footer";
+import NoteServices from "../../services/NoteServices";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const viewerLayout = {
   MIN_VIEWER_WIDTH: 300,
@@ -34,7 +42,9 @@ const PdfViewer = () => {
     onUpdateHighlight,
   } = useHighlight(viewerRef, setIsContextMenu, bookStyle, bookOption.flow);
 
-  const onContextmMenuRemove = () => setIsContextMenu(false);
+  const onContextmMenuRemove = () => {
+    setIsContextMenu(false);
+  };
 
   // CHANGE PAGE LOGIC
   const onPageMove = (type: any) => {
@@ -54,12 +64,18 @@ const PdfViewer = () => {
   };
 
   const queryParams = new URLSearchParams(window.location.search);
-  const id = queryParams.get("id") || "";
+  const bookId = queryParams.get("book_id") || "";
+  const userId = queryParams.get("user_id") || "";
+
+  if (bookId || userId) {
+    window.localStorage.setItem("bookId", bookId);
+    window.localStorage.setItem("userId", userId);
+  }
 
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [EPUB_URL, setUrl] = useState("");
 
-  const URL = `${BASE_URL}/api/book-detail/${id}/?format=json`;
+  const URL = `${BASE_URL}/api/book-detail/${bookId}/?format=json`;
 
   const loadFile = async () => {
     //console.log("fetching file..");
@@ -92,8 +108,24 @@ const PdfViewer = () => {
   };
 
   useEffect(() => {
+    const loadAllHighlights = async () => {
+      try {
+        const allHighlight = await NoteServices.getAllNotes();
+        dispatch(getHighlight(allHighlight.notes));
+      } catch (error) {
+        console.error("Error loading highlights:", error);
+      }
+    };
+    if (bookId && userId) {
+      loadAllHighlights();
+    }
     loadFile();
   }, []);
+
+  const viewerElement = viewerRef.current;
+  if (viewerElement && viewerElement.children.length >= 2) {
+    viewerElement.removeChild(viewerElement.children[0]);
+  }
 
   return (
     <>
@@ -101,21 +133,18 @@ const PdfViewer = () => {
         &lt;
       </div>
       <div className="eBook_outer">
-        {bookOption && bookOption && (
-          <ReactEpubViewer
-            url={EPUB_URL}
-            // url="./a.epub"
-            onPageChange={onPageChange}
-            viewerLayout={viewerLayout}
-            viewerStyle={bookStyle}
-            viewerOption={bookOption}
-            onBookInfoChange={onBookInfoChange}
-            onTocChange={onTocChange}
-            onSelection={onContextMenu}
-            loadingView={<LoadingView />}
-            ref={viewerRef}
-          />
-        )}
+        <ReactEpubViewer
+          url={EPUB_URL}
+          onPageChange={onPageChange}
+          viewerLayout={viewerLayout}
+          viewerStyle={bookStyle}
+          viewerOption={bookOption}
+          onBookInfoChange={onBookInfoChange}
+          onTocChange={onTocChange}
+          onSelection={onContextMenu}
+          loadingView={<LoadingView />}
+          ref={viewerRef}
+        />
       </div>
       <div className="nextBtn navBtn" onClick={() => onPageMove("NEXT")}>
         &gt;
@@ -131,7 +160,17 @@ const PdfViewer = () => {
         onContextmMenuRemove={onContextmMenuRemove}
       />
 
-      <Footer />
+      <ToastContainer
+        position="top-left"
+        autoClose={3500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </>
   );
 };

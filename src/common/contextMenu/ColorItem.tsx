@@ -31,7 +31,7 @@ const Wrapper = styled.button`
   background-color: rgba(0, 0, 0, 0);
   transition: 0.1s ${styles.transition};
   outline: none;
-
+  border: none;
   &:hover,
   &:focus {
     background-color: ${palette.blue3};
