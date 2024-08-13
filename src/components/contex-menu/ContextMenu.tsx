@@ -85,7 +85,7 @@ const ContextMenu = ({
         dispatch(changeLoadingState(false));
       }
     };
-    if (bookId && userId) {
+    if (bookId && userId && highlight.id) {
       removeBookMark();
     }
   }, [highlight, onRemoveHighlight, onContextmMenuRemove]);

@@ -94,7 +94,7 @@ const bookSlice = createSlice({
     },
     //first time set highlight
     getHighlight(state, action) {
-      state.highlights = action.payload;
+      state.highlights = action.payload ?? [];
     },
     // remove note content
     removeNoteContent(state, action) {
@@ -105,7 +105,7 @@ const bookSlice = createSlice({
       });
     },
     // add note content
-    addNoteContent(state, action) {      
+    addNoteContent(state, action) {
       state.highlights.map((highlight) => {
         if (highlight.id === action.payload.bookMarkId) {
           highlight.note_content.push(action.payload.noteData);

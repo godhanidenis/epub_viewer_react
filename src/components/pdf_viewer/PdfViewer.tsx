@@ -29,6 +29,8 @@ export const contextmenuWidth = 160;
 const queryParams = new URLSearchParams(window.location.search);
 const bookId = queryParams.get("book_id") || "";
 const userId = queryParams.get("user_id") || "";
+const type = queryParams.get("type");
+// const token = queryParams.get("access_token") || "";
 export { bookId, userId };
 
 const PdfViewer = () => {
@@ -83,7 +85,11 @@ const PdfViewer = () => {
       },
     });
     const res = await response.json();
-    setUrl(`${BASE_URL}${res.library.epub_file}`);
+    if (type === "1") {
+      setUrl(`${BASE_URL}${res.library.epub_file}`);
+    } else {
+      setUrl(`${BASE_URL}${res.library.epub_sample_file}`);
+    }
 
     // setLoading(false);
 
